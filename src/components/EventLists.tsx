@@ -7,6 +7,15 @@ import PetFilter from "./PetFilter";
 interface EventListProps {
   onSelectEvent: (eventId: number) => void;
 }
+export interface Event {
+  id: number;
+  category: string;
+  title: string;
+  description: string;
+  location: string;
+  petsAllowed: boolean;
+  date: string;
+}
 
 const EventList: React.FC<EventListProps> = ({ onSelectEvent }) => {
   const [page, setPage] = useState(1);
@@ -30,7 +39,7 @@ const EventList: React.FC<EventListProps> = ({ onSelectEvent }) => {
       <SearchBar onSearch={setSearch} />
       <PetFilter onToggle={setPetsAllowed} />
       <ul>
-        {data?.map((event) => (
+        {data?.map((event: Event) => (
           <li
             key={event.id}
             onClick={() => onSelectEvent(event.id)}
